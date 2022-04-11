@@ -8,7 +8,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 project (framework)
 
 file(GLOB src "src/*.cpp")
-file(GLOB engine_src "engine/*.cpp")
+file(GLOB engine_src ${PROJECT_SOURCE_DIR}/engine/framework.cpp ${PROJECT_SOURCE_DIR}/engine/basic/*.cpp)
 add_executable(${PROJECT_NAME} ${src} ${engine_src})
 
 find_package(SDL2 REQUIRED)

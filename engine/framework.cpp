@@ -1,8 +1,8 @@
 #include "framework.hpp"
-#include "engine/shapes.hpp"
+
 #include <iostream>
 
-Framework::Framework(int _width, int _height) : window(NULL), renderer(NULL)
+Framework::Framework(int _width, int _height)
 {
     width = _width;
     height = _height;
@@ -24,10 +24,6 @@ void Framework::begin()
 {
     SDL_RenderClear(renderer);   
 }
-void Framework::draw(SDL_Texture*img)
-{
-    SDL_RenderCopy(renderer, img, NULL, NULL);
-}
 void Framework::end()
 {
     SDL_RenderPresent(renderer);
@@ -38,4 +34,13 @@ SDL_Texture* Framework::loadImage(std::string path)
 	SDL_Texture* texture = NULL;
 	texture = IMG_LoadTexture(renderer, path.c_str());
 	return texture;
+}
+
+void Framework::draw(SDL_Texture*img)
+{
+    SDL_RenderCopy(renderer, img, NULL, NULL);
+}
+void Framework::draw(Drawable&obj)
+{
+    SDL_RenderCopyEx(renderer, obj.getTexture(), NULL, obj.r.toSDLRect(), obj.angle, NULL, SDL_RendererFlip::SDL_FLIP_NONE);
 }

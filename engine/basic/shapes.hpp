@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SDL.h>
 
 class Vector2
@@ -42,6 +44,8 @@ class Rectangle
 public:
     Vector2 p;
     Vector2 dim;
+    SDL_Rect*sdlRect;
+    Rectangle(){};
     Rectangle(int _x, int _y, int _width, int _heigh)
     {
         p.x = _x;
@@ -49,13 +53,13 @@ public:
         dim.x = _width;
         dim.y = _heigh;
     }
-    SDL_Rect toSDLRect()
+    SDL_Rect*toSDLRect()
     {
-        SDL_Rect r;
-        r.x = p.x;
-        r.y = p.y;
-        r.w = dim.x;
-        r.h = dim.y;
-        return r;
+        sdlRect = new SDL_Rect();
+        sdlRect->x = p.x;
+        sdlRect->y = p.y;
+        sdlRect->w = dim.x;
+        sdlRect->h = dim.y;
+        return sdlRect;
     }
 };

@@ -1,5 +1,4 @@
 #include "engine/framework.hpp"
-#include "engine/shapes.hpp"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -12,7 +11,6 @@ void draw();
 
 Framework*fw;
 
-SDL_Texture * img;
 
 int main(int argc, char * argv[])
 {
@@ -22,15 +20,18 @@ int main(int argc, char * argv[])
 
     fw = new Framework(800,600);
 
-    // fw = Framework(800, 600);
-    img  = fw->loadImage("./content/blob.png");
+    Drawable x(fw->loadImage("./content/blob.png"), 10 , 10);
 
     init();
     while(!(event.type == SDL_QUIT))
     {
         SDL_PollEvent(&event);  // Catching the poll event.
 
-        draw();
+        fw->begin();
+        fw->draw(x);
+        fw->end();
+
+        x.angle += 0.1f;
 
         SDL_Delay(10);  // setting some Delay
     }
@@ -46,7 +47,5 @@ void update()
 }
 void draw()
 {
-    fw->begin();
-    fw->draw(img);
-    fw->end();
+
 }
