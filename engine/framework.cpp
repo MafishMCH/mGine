@@ -2,14 +2,15 @@
 
 #include <iostream>
 
-Framework::Framework(int _width, int _height)
+Framework::Framework(std::string windowName, int _width, int _height)
 {
     width = _width;
     height = _height;
-    window = SDL_CreateWindow("Terrainer", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    screen = SDL_GetWindowSurface(window);    
+    screen = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 1920, 1080);    
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 }
 Framework::~Framework(){
     SDL_DestroyRenderer(renderer);
@@ -22,10 +23,14 @@ void Framework::update()
 }
 void Framework::begin()
 {
+    SDL_SetRenderTarget(renderer, screen);
     SDL_RenderClear(renderer);   
 }
 void Framework::end()
 {
+    SDL_RenderPresent(renderer);
+    SDL_SetRenderTarget(renderer, NULL);
+    SDL_RenderCopyF(renderer,screen, NULL,NULL);
     SDL_RenderPresent(renderer);
 }
 

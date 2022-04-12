@@ -9,9 +9,8 @@
 class Framework
 {
 public:
-    SDL_Surface*img;
     // Contructor which initialize the parameters.
-    Framework(int height_, int width_);
+    Framework(std::string windowName, int height_, int width_);
     Framework(){};
 
     // Destructor
@@ -28,7 +27,7 @@ private:
     int height;     // Height of the window
     int width;      // Width of the window
 
-    SDL_Surface *screen;
+    SDL_Texture *screen;
     SDL_Renderer *renderer = NULL;      // Pointer for the renderer
     SDL_Window *window = NULL;      // Pointer for the window
 };

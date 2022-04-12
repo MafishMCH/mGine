@@ -18,7 +18,7 @@ int main(int argc, char * argv[])
     IMG_Init(IMG_INIT_PNG);
     SDL_Event event;
 
-    fw = new Framework(800,600);
+    fw = new Framework("Terrainer", 1280, 720);
 
     Drawable x(fw->loadImage("./content/blob.png"), Vector2(10,10));
 
