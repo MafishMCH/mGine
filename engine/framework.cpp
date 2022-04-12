@@ -38,9 +38,21 @@ SDL_Texture* Framework::loadImage(std::string path)
 
 void Framework::draw(SDL_Texture*img)
 {
-    SDL_RenderCopy(renderer, img, NULL, NULL);
+    SDL_RenderCopyF(renderer, img, NULL, NULL);
 }
 void Framework::draw(Drawable&obj)
 {
-    SDL_RenderCopyEx(renderer, obj.getTexture(), NULL, obj.r.toSDLRect(), obj.angle, NULL, SDL_RendererFlip::SDL_FLIP_NONE);
+    SDL_FRect*drawRectangle;
+    if(obj.scale != 1.0f)
+    {
+        drawRectangle = new SDL_FRect();
+        drawRectangle->x = obj.r.p.x;
+        drawRectangle->y = obj.r.p.y;
+        drawRectangle->w = obj.scale * obj.r.dim.x;
+        drawRectangle->h = obj.scale * obj.r.dim.y;
+    }
+    else
+        drawRectangle = obj.r.toSDL_FRect();
+
+    SDL_RenderCopyExF(renderer, obj.getTexture(), NULL, drawRectangle, obj.angle, NULL, SDL_RendererFlip::SDL_FLIP_NONE);
 }

@@ -14,8 +14,6 @@ public:
     float scale = 1.0f;
     Drawable(){};
     Drawable(SDL_Texture*img, const Rectangle&rectangle);
-    Drawable(SDL_Texture*img, int x, int y);
-    Drawable(SDL_Texture*img, int x, int y, int w, int h);
     Drawable(SDL_Texture*img, const Vector2&pos);
     Drawable(SDL_Texture*img, const Vector2&pos, const Vector2&dim);
     ~Drawable();

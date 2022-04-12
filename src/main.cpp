@@ -20,9 +20,10 @@ int main(int argc, char * argv[])
 
     fw = new Framework(800,600);
 
-    Drawable x(fw->loadImage("./content/blob.png"), 10 , 10);
+    Drawable x(fw->loadImage("./content/blob.png"), Vector2(10,10));
 
     init();
+    float f = 0.0f;
     while(!(event.type == SDL_QUIT))
     {
         SDL_PollEvent(&event);  // Catching the poll event.
@@ -30,8 +31,6 @@ int main(int argc, char * argv[])
         fw->begin();
         fw->draw(x);
         fw->end();
-
-        x.angle += 0.1f;
 
         SDL_Delay(10);  // setting some Delay
     }

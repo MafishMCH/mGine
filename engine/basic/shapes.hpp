@@ -5,14 +5,14 @@
 class Vector2
 {
 public:
-    int x = 0;
-    int y = 0;
+    float x = 0;
+    float y = 0;
     Vector2()
     {
         x = 0;
         y = 0;
     }
-    Vector2(int _x, int _y)
+    Vector2(float _x, float _y)
     {
         x = _x;
         y = _y;
@@ -44,18 +44,18 @@ class Rectangle
 public:
     Vector2 p;
     Vector2 dim;
-    SDL_Rect*sdlRect;
+    SDL_FRect*sdlRect;
     Rectangle(){};
-    Rectangle(int _x, int _y, int _width, int _heigh)
+    Rectangle(float _x, float _y, float _width, float _heigh)
     {
         p.x = _x;
         p.y = _y;
         dim.x = _width;
         dim.y = _heigh;
     }
-    SDL_Rect*toSDLRect()
+    SDL_FRect*toSDL_FRect()
     {
-        sdlRect = new SDL_Rect();
+        sdlRect = new SDL_FRect();
         sdlRect->x = p.x;
         sdlRect->y = p.y;
         sdlRect->w = dim.x;
