@@ -4,6 +4,7 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #include <string>
 
 class Framework
@@ -26,8 +27,13 @@ public:
 private:
     int height;     // Height of the window
     int width;      // Width of the window
+    void drawDebugInfo();
 
     SDL_Texture *screen;
     SDL_Renderer *renderer = NULL;      // Pointer for the renderer
     SDL_Window *window = NULL;      // Pointer for the window
+
+    SDL_Texture*consoleBg;
+    TTF_Font* font;
+
 };
