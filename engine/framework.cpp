@@ -24,6 +24,10 @@ Framework::~Framework(){
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
+void Framework::toggleFlag(FrameworkFlags flag)
+{
+    flags ^= (1 << (int)flag);
+}
 void Framework::begin()
 {
     SDL_RenderClear(renderer);   
@@ -63,6 +67,9 @@ void Framework::draw(Drawable&obj)
 
 void Framework::drawDebugInfo()
 {
+    if((flags >> 1 & 1) == false)
+        return;
+       
     console.updateDiagnostics();
     SDL_Color textFgColor = { 255, 255, 255 , 255};
     SDL_Color textBgColor = { 0, 0, 0, 255};

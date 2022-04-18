@@ -35,6 +35,11 @@ int main(int argc, char * argv[])
     {
         SDL_PollEvent(&event);  // Catching the poll event.
 
+        const Uint8* keys = SDL_GetKeyboardState(NULL);
+        if(keys[SDL_SCANCODE_GRAVE])
+            fw->toggleFlag(FrameworkFlags::SHOW_CONSOLE);
+
+
         fw->begin();
 
 

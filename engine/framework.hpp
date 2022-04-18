@@ -7,6 +7,12 @@
 #include <SDL_ttf.h>
 #include <string>
 
+enum class FrameworkFlags
+{
+    SHOW_FPS = 0,
+    SHOW_CONSOLE = 1,
+};
+
 class Framework
 {
 public:
@@ -23,10 +29,14 @@ public:
     void draw(SDL_Texture* img);
     void draw(Drawable&obj);
 
+    void toggleFlag(FrameworkFlags flag);
+
     SDL_Texture* loadImage(std::string path);
 private:
     int height;     // Height of the window
     int width;      // Width of the window
+    uint32_t flags; //Flags of the engine
+    
     void drawDebugInfo();
 
     SDL_Texture *screen;
