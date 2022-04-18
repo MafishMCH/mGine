@@ -1,5 +1,5 @@
 #pragma once
-#include "engine/basic/shapes.hpp"
+#include "mgine/basic/shapes.hpp"
 
 #include <SDL.h>
 #include <SDL_image.h>

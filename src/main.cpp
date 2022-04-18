@@ -1,6 +1,6 @@
-#include "engine/framework.hpp"
-#include "engine/debug/console.hpp"
-#include "engine/debug/performance.hpp"
+#include "mgine/mgine.hpp"
+#include "mgine/debug/console.hpp"
+#include "mgine/debug/performance.hpp"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -12,7 +12,7 @@ void init();
 void update();
 void draw();
 
-Framework*fw;
+Mgine*fw;
 
 
 int main(int argc, char * argv[])
@@ -22,7 +22,7 @@ int main(int argc, char * argv[])
     TTF_Init();
     SDL_Event event;
 
-    fw = new Framework("Terrainer", 1280, 720);
+    fw = new Mgine("mgine DEMO", 1280, 720);
 
     std::vector<Drawable> items;
     for(int i = 0; i < 5; i++)
@@ -35,7 +35,7 @@ int main(int argc, char * argv[])
 
         const Uint8* keys = SDL_GetKeyboardState(NULL);
         if(keys[SDL_SCANCODE_GRAVE])
-            fw->toggleFlag(FrameworkFlags::SHOW_CONSOLE);
+            fw->toggleFlag(MgineFlags::SHOW_CONSOLE);
 
 
         fw->begin();

@@ -1,10 +1,10 @@
-#include "framework.hpp"
+#include "mgine.hpp"
 #include "debug/console.hpp"
 
 #include <iostream>
 
 
-Framework::Framework(std::string windowName, int _width, int _height)
+Mgine::Mgine(std::string windowName, int _width, int _height)
 {
     width = _width;
     height = _height;
@@ -15,40 +15,40 @@ Framework::Framework(std::string windowName, int _width, int _height)
     SDL_RenderSetLogicalSize(renderer, 1920, 1080);
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 
-    consoleBg = loadImage("./content/engine/consoleBg.png");
-    font = TTF_OpenFont("./content/engine/montserrat.ttf", 20);
+    consoleBg = loadImage("./content/mgine/consoleBg.png");
+    font = TTF_OpenFont("./content/mgine/montserrat.ttf", 20);
     SDL_SetRenderDrawColor(renderer, 145, 178, 217, 255);
 }
-Framework::~Framework(){
+Mgine::~Mgine(){
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
-void Framework::toggleFlag(FrameworkFlags flag)
+void Mgine::toggleFlag(MgineFlags flag)
 {
     flags ^= (1 << (int)flag);
 }
-void Framework::begin()
+void Mgine::begin()
 {
     SDL_RenderClear(renderer);   
 }
-void Framework::end()
+void Mgine::end()
 {
     drawDebugInfo();
     SDL_RenderPresent(renderer);
 }
 
-SDL_Texture* Framework::loadImage(std::string path)
+SDL_Texture* Mgine::loadImage(std::string path)
 {
 	SDL_Texture* texture = NULL;
 	texture = IMG_LoadTexture(renderer, path.c_str());
 	return texture;
 }
-void Framework::draw(SDL_Texture*img)
+void Mgine::draw(SDL_Texture*img)
 {
     SDL_RenderCopyF(renderer, img, NULL, NULL);
 }
-void Framework::draw(Drawable&obj, const SDL_Color& clr)
+void Mgine::draw(Drawable&obj, const SDL_Color& clr)
 {
     if(&clr != &SDL_COLOR_WHITE)
     {
@@ -76,7 +76,7 @@ void Framework::draw(Drawable&obj, const SDL_Color& clr)
     }
 }
 
-void Framework::drawDebugInfo()
+void Mgine::drawDebugInfo()
 {
     if((flags >> 1 & 1) == false)
         return;
