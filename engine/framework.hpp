@@ -1,6 +1,7 @@
 #pragma once
 
 #include "engine/basic/drawable.hpp"
+#include "engine/sdl_colors.hpp"
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -27,7 +28,7 @@ public:
     void begin();
     void end();
     void draw(SDL_Texture* img);
-    void draw(Drawable&obj);
+    void draw(Drawable&obj, const SDL_Color&clr = SDL_COLOR_WHITE);
 
     void toggleFlag(FrameworkFlags flag);
 
@@ -36,7 +37,7 @@ private:
     int height;     // Height of the window
     int width;      // Width of the window
     uint32_t flags; //Flags of the engine
-    
+
     void drawDebugInfo();
 
     SDL_Texture *screen;

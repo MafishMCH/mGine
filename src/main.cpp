@@ -25,10 +25,8 @@ int main(int argc, char * argv[])
     fw = new Framework("Terrainer", 1280, 720);
 
     std::vector<Drawable> items;
-    for(int i = 0; i < 60; i++)
-        for(int j = 0; j < 34; j++)
-            items.emplace_back(fw->loadImage("./content/blob.png"), Vector2(i*32, j*32));
-
+    for(int i = 0; i < 5; i++)
+        items.emplace_back(fw->loadImage("./content/blob.png"), Vector2(i*32, 32));
 
     init();
     while(!(event.type == SDL_QUIT))
@@ -42,12 +40,14 @@ int main(int argc, char * argv[])
 
         fw->begin();
 
+        int h = 0;
 
-        for(auto&item : items)
-        {
-            item.angle += 0.05f;
-            fw->draw(item);
-        }
+        fw->draw(items[0], SDL_COLOR_WHITE);
+        fw->draw(items[1], SDL_COLOR_RED);
+        fw->draw(items[2], SDL_COLOR_GREEN);
+        fw->draw(items[3], SDL_COLOR_BLUE);
+        fw->draw(items[4], SDL_COLOR_SEMITRANSPARENT);
+
 
         fw->end();
 

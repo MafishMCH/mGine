@@ -48,8 +48,13 @@ void Framework::draw(SDL_Texture*img)
 {
     SDL_RenderCopyF(renderer, img, NULL, NULL);
 }
-void Framework::draw(Drawable&obj)
+void Framework::draw(Drawable&obj, const SDL_Color& clr)
 {
+    if(&clr != &SDL_COLOR_WHITE)
+    {
+        SDL_SetTextureColorMod(obj.getTexture(), clr.r, clr.g, clr.b);
+        SDL_SetTextureAlphaMod(obj.getTexture(), clr.a);
+    }
     SDL_FRect*drawRectangle;
     if(obj.scale != 1.0f)
     {
@@ -62,7 +67,13 @@ void Framework::draw(Drawable&obj)
     else
         drawRectangle = obj.r.toSDL_FRect();
 
-    SDL_RenderCopyExF(renderer, obj.getTexture(), NULL, drawRectangle, obj.angle, NULL, SDL_RendererFlip::SDL_FLIP_NONE);
+    SDL_RenderCopyExF(renderer, obj.getTexture(), NULL, drawRectangle, obj.angle, NULL, SDL_RendererFlip::SDL_FLIP_NONE);\
+
+    if(&clr != &SDL_COLOR_WHITE)
+    {
+        SDL_SetTextureColorMod(obj.getTexture(), SDL_COLOR_WHITE.r,  SDL_COLOR_WHITE.g,  SDL_COLOR_WHITE.b);
+        SDL_SetTextureAlphaMod(obj.getTexture(), SDL_COLOR_WHITE.a);
+    }
 }
 
 void Framework::drawDebugInfo()
